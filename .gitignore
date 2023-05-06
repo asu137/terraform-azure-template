@@ -1,0 +1,6 @@
+terraform.tfstate.lock.info
+terraform.tfvars
+terraform.tfstate*
+.terraform/
+.DS_Store
+errored.tfstate
