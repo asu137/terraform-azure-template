@@ -222,7 +222,7 @@ resource "azurerm_private_dns_a_record" "example" {
 }
 
 /* コンテナーレジストリ */
-resource "azurerm_container_registry" "_acr" {
+resource "azurerm_container_registry" "acr" {
   name                     = "${local.resource_prefix}acr"
   location                 = azurerm_resource_group.resource_group.location
   resource_group_name      = azurerm_resource_group.resource_group.name
@@ -231,7 +231,7 @@ resource "azurerm_container_registry" "_acr" {
 }
 
 /* Application Insights */
-resource "azurerm_application_insights" "_insights" {
+resource "azurerm_application_insights" "insights" {
   name                = "${local.resource_prefix_with_hyphen}insights"
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
@@ -323,13 +323,13 @@ resource "azurerm_monitor_action_group" "alert_action" {
 }
 
 /* エラーログ アラート */
-resource "azurerm_monitor_scheduled_query_rules_alert_v2" "_error_log_alert" {
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "error_log_alert" {
   name                = "error-log-alert"
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
 
   scopes = [
-    azurerm_application_insights._insights.id
+    azurerm_application_insights.insights.id
   ]
 
   description           = "Application Insightsにエラー出力がされました。\nエラー内容を確認してください。"
